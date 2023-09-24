@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AvoidColission : SteeringBehavior
 {
-    public ObstacleSpawner obstacleSpawner;
+    public ObstacleSpawner obstacleController;
     public float maxSeeAhead;
     public float obstacleRadius;
     public float maxAvoidForce;
@@ -13,14 +13,13 @@ public class AvoidColission : SteeringBehavior
     public List<Vector3> _obstacleList;
     private Vector3 _ahead;
     private Vector3 _ahead2;
-    private float distance;
-
 
     private void Start()
     {
-        _obstacleList = obstacleSpawner.obstaclePositions;
+        _obstacleList = obstacleController.obstaclePositions;
         _ahead = Velocity.normalized * maxSeeAhead;
         _ahead2 = Velocity.normalized * maxSeeAhead * 0.5f;
+        FindBiggestThread();
     }
 
     public override Vector3 GetForce()
@@ -35,9 +34,20 @@ public class AvoidColission : SteeringBehavior
         foreach (var obstacle in _obstacleList)
         {
             float distance = Vector3.Distance(obstacle, Position);
-            
           
+            if (distance < obstacleRadius)
+            {
+                Debug.Log(distance);
+            }
+            
         }
         return new Vector3();
     }
+
+    bool CollisionDetected()
+    {
+        return true;
+    }
+    
+    
 }
