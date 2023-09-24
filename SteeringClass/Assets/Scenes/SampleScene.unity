@@ -971,7 +971,6 @@ GameObject:
   - component: {fileID: 1920406209}
   - component: {fileID: 1920406208}
   - component: {fileID: 1920406207}
-  - component: {fileID: 1920406206}
   - component: {fileID: 1920406212}
   - component: {fileID: 1920406211}
   - component: {fileID: 1920406213}
@@ -997,25 +996,6 @@ Transform:
   m_Father: {fileID: 469375276}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1920406206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920406204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab1e6019116fbb4099fd05321122f3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  DesiredVelocity: {x: 0, y: 0, z: 0}
-  Velocity: {x: 0, y: 0, z: 0}
-  Position: {x: 0, y: 0, z: 1}
-  Target: {x: 0, y: 0, z: 0}
-  arrival: 0
-  slowingRadius: 0
 --- !u!114 &1920406207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1003,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920406204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b797cdba60a8647b29c132c7e517fd, type: 3}
   m_Name: 
@@ -1034,7 +1014,7 @@ MonoBehaviour:
   - {x: 0, y: 0.5, z: -15}
   - {x: -20, y: 0.5, z: 20}
   - {x: 20, y: 0.5, z: -20}
-  seek: {fileID: 1920406206}
+  seek: {fileID: 0}
   distance: 3
 --- !u!65 &1920406208
 BoxCollider:
@@ -1128,7 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviors:
-  - {fileID: 1920406206}
+  - {fileID: 1920406213}
   rigidBody: {fileID: 1920406211}
   velocity: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
@@ -1149,9 +1129,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   Position: {x: 0, y: 0, z: 0}
   Target: {x: 0, y: 0, z: 0}
-  obstacleSpawner: {fileID: 46908561}
+  obstacleController: {fileID: 46908561}
   maxSeeAhead: 0
-  obstacleRadius: 0
+  obstacleRadius: 25
   maxAvoidForce: 0
   showVectors: 0
   _obstacleList: []

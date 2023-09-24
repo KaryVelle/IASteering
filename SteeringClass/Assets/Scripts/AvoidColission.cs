@@ -36,6 +36,7 @@ public class AvoidColission : SteeringBehavior
             float distance = Vector3.Distance(obstacle, Position);
           
             if (distance < obstacleRadius)
+            if (distance < obstacleRadius)
             {
                 Debug.Log(distance);
             }
