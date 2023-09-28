@@ -8,7 +8,7 @@ public class Seek : SteeringBehavior
     public bool arrival;
     public float slowingRadius;
     private float _distance;
-
+    public Vector3 steering;
 
     public override Vector3 GetForce()
     {
@@ -33,7 +33,7 @@ public class Seek : SteeringBehavior
       }
       
       transform.position += Velocity * Time.deltaTime;
-      Vector3 steering = DesiredVelocity - Velocity;
+      steering = DesiredVelocity - Velocity;
       Velocity = Vector3.ClampMagnitude(Velocity + steering, speed);
       return steering;
     }
