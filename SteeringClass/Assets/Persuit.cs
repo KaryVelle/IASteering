@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Persuit : SteeringBehavior
 {
-    private int T;
+    public int T;
     public GameObject pursuitTarget;
     public PlayerController _pController;
     
@@ -17,9 +17,10 @@ public class Persuit : SteeringBehavior
     public override Vector3 GetForce()
     {
         
-        Vector3 futurePosition = pursuitTarget.transform.position + _pController.vel * T;
-        Position = transform.position;
-        DesiredVelocity = (futurePosition - Position).normalized * speed;
+        Vector3 target = pursuitTarget.transform.position + _pController.vel * T;
+        
+        DesiredVelocity = (target - Position).normalized * speed;
+        transform.position += Velocity * Time.deltaTime;
         Vector3 steering = DesiredVelocity - Velocity;
         Velocity = Vector3.ClampMagnitude(Velocity + steering, speed);
         return steering;
