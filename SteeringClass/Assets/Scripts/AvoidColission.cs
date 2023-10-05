@@ -13,34 +13,41 @@ public class AvoidColission : SteeringBehavior
     public List<Vector3> _obstacleList;
     private Vector3 _ahead;
     private Vector3 _ahead2;
+
+    private void Start()
+    {
+        _obstacleList = obstacleSpawner.obstaclePositions;
+    }
     
+
 
     public override Vector3 GetForce()
     {
         
+        _ahead = Position + (Velocity.normalized * maxSeeAhead);
         
-        _obstacleList = obstacleSpawner.obstaclePositions;
-        _ahead = Velocity.normalized * maxSeeAhead;
-        _ahead2 = Velocity.normalized * maxSeeAhead * 0.5f;
+        _ahead2 = Position + (Velocity.normalized * maxSeeAhead * 0.5f);
         
-        
-            Debug.DrawLine(Position, Position + _ahead, Color.black);
+        if (showVectors)
+        {
+            Debug.DrawLine(Position, _ahead ,Color.green);
+        }
         
 
         Vector3? biggest = FindBiggestThread();
         if (biggest == null)
         {
             // no hay obs
-            Debug.Log("obstaculo");
             return Vector3.zero;
         }
         else
         {
             //si hay
-            Debug.Log("obstaculo");
+           // Debug.Log("obstaculo");
             Vector3 avoidance = _ahead - biggest.Value;
-            avoidance = Vector3.Normalize(avoidance) * maxAvoidForce;
-            return   Velocity.normalized + avoidance ;
+            avoidance = avoidance.normalized;
+            avoidance *= maxAvoidForce;
+            return  avoidance ;
             
         }
        
@@ -55,8 +62,7 @@ public class AvoidColission : SteeringBehavior
             float distance = Vector3.Distance(obstacle, Position);
             bool collision = Collision(_ahead, _ahead2, obstacle);
 
-            if (collision && (mostThreatening == null)  || 
-               collision && distance < Vector3.Distance(Position, mostThreatening.Value))
+            if (collision &&  (mostThreatening == null || distance <= Vector3.Distance(Position,mostThreatening.Value)))
             {
                 mostThreatening = obstacle;
             }
@@ -66,11 +72,13 @@ public class AvoidColission : SteeringBehavior
 
     bool Collision(Vector3 _ahead, Vector3 _ahead2, Vector3 obstacle)
     {
-        if ((Vector3.Distance(obstacle, _ahead) <= obstacleRadius) ||
-            (Vector3.Distance(obstacle, _ahead2) <= obstacleRadius))
+        if (Vector3.Distance(_ahead, obstacle) < obstacleRadius || 
+            Vector3.Distance(_ahead2, obstacle) < obstacleRadius)
         {
+            Debug.Log("Si hay");
             return true;
         }
+        //Debug.Log("No hay");
         return false;
     }
 }

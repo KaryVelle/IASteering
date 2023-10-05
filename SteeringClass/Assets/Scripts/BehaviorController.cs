@@ -24,12 +24,17 @@ public class BehaviorController : MonoBehaviour
         foreach ( SteeringBehavior behavior in behaviors)
         {
             behavior.Position = transform.position;
+            behavior.Velocity = velocity;
             totalForce += behavior.GetForce();
         }
 
-       
+        velocity += totalForce;
         rigidBody.velocity += totalForce;
         transform.position += velocity * Time.deltaTime;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -10000, 10000) , 
+            Mathf.Clamp( transform.position.y, 1.3f, 1.5f),
+            Mathf.Clamp(transform.position.z , -10000, 1000)
+            );
 
     }
 }

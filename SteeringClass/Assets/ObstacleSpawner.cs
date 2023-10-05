@@ -14,7 +14,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Start()
     {
-        float total = Random.Range(1, 100);
+        float total = Random.Range(50, 100);
         for (int i = 0; i <= total; i++)
         {
             Vector3 randomPos = new Vector3(Random.Range(-60f, 60f), 1f, Random.Range(-60f,60f));
