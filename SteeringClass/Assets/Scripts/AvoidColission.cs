@@ -10,9 +10,11 @@ public class AvoidColission : SteeringBehavior
     public float obstacleRadius;
     public float maxAvoidForce;
     public bool showVectors;
-    public List<Vector3> _obstacleList;
+    [SerializeField] private List<Vector3> _obstacleList;
     private Vector3 _ahead;
     private Vector3 _ahead2;
+    private float _distance;
+    private Vector3 biggestThread;
 
     private void Start()
     {
@@ -33,20 +35,20 @@ public class AvoidColission : SteeringBehavior
     {
         foreach (var obstacle in _obstacleList)
         {
-            float distance = Vector3.Distance(obstacle, Position);
-          
-            if (distance < obstacleRadius)
-            if (distance < obstacleRadius)
-            {
-                Debug.Log(distance);
-            }
             
+            _distance = Vector3.Distance(obstacle, Position);
+            bool collision = CollisionDetected(_ahead, _ahead2);
+
         }
         return new Vector3();
     }
 
-    bool CollisionDetected()
+    private bool CollisionDetected(Vector3 _ahead, Vector3 _ahead2)
     {
+        if (this._ahead > ) 
+        {
+            
+        }
         return true;
     }
     
