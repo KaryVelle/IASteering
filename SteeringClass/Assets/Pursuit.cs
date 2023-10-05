@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Persuit : SteeringBehavior
+public class Pursuit : SteeringBehavior
 {
     public int T;
     public GameObject pursuitTarget;
